@@ -31,8 +31,10 @@ public class Subject {
     private Teacher teacher;
 
     @ManyToOne
-    @JoinColumn(name ="note_id")
-    private Note note;
+    @JoinColumn(name= "classroom_id")
+    private Classroom classroom;
+
+    
 
     
 }

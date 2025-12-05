@@ -25,9 +25,8 @@ public class ClassroomService {
     }
 
     // Put
-    public Classroom updateClassroom(Long id, Classroom classroom) {
-        Classroom classroomExisting = classroomRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clase con " + id + " no encontrada"));
+    public Classroom updateClassroom(long id, Classroom classroom) {
+        Classroom classroomExisting = classroomRepository.findById(id).orElseThrow(() -> new RuntimeException("Clase con " + id + " no encontrada"));
         classroomExisting.setName(classroom.getName());
         classroomExisting.setCourse(classroom.getCourse());
         classroomExisting.setStage(classroom.getStage());
@@ -35,8 +34,10 @@ public class ClassroomService {
     }
 
     // Delete
-    public void deleteClassroom(Long id, Classroom classroom) {
+    public void deleteClassroom(long id, Classroom classroom) {
         classroomRepository.deleteById(id);
     }
+
+    
 
 }

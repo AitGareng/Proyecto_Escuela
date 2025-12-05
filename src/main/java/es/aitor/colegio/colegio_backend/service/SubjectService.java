@@ -25,15 +25,18 @@ public class SubjectService {
     }
 
     // PUT
-    public Subject updateSubject(Long id, Subject subject) {
+    public Subject updateSubject(long id, Subject subject) {
         Subject subjectExisting = subjectRepository.findById(id).orElseThrow(() -> new RuntimeException("Asignatura con " + id + " no encontrada"));
         subjectExisting.setName(subject.getName());
         subjectExisting.setDescription(subject.getDescription());
+        subjectExisting.setTeacher(subject.getTeacher());
+        subjectExisting.setClassroom(subject.getClassroom());
+
         return subjectRepository.save(subjectExisting);
     }
 
     // DELETE
-    public void deleteSubject(Long id, Subject subject) {
+    public void deleteSubject(long id, Subject subject) {
         subjectRepository.deleteById(id);
     }
 

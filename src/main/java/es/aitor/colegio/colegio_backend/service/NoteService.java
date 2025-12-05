@@ -26,14 +26,16 @@ public class NoteService {
     }
 
     //PUT
-    public Note updateNote(Long id, Note note){
+    public Note updateNote(long id, Note note){
         Note noteExisting = noteRepository.findById(id).orElseThrow(() -> new RuntimeException("Nota con " + id + " no encontrada"));
-        noteExisting.setValor(noteExisting.getValor());
+        noteExisting.setValor(note.getValor());
+        noteExisting.setStudent(note.getStudent());
+        noteExisting.setSubject(note.getSubject());
         return noteRepository.save(noteExisting);
     }
 
     //DELETE
-    public void deleteNote(Long id, Note note){
+    public void deleteNote(long id, Note note){
         noteRepository.deleteById(id);
     }
     

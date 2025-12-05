@@ -47,6 +47,11 @@ public class StudentController {
         studentService.deleteStudent(id, null);
         return "Estudiante eliminado";
     }
+
+    @GetMapping("/{id}")
+    public Student getStudent(@PathVariable long id, @RequestBody Student student){
+        return studentService.getStudent(id, student);
+    }
     
     
     

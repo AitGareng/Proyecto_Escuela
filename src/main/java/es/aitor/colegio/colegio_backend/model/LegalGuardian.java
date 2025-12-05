@@ -1,7 +1,5 @@
 package es.aitor.colegio.colegio_backend.model;
 
-import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,42 +7,34 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "students")
-public class Student {
+public class LegalGuardian {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
 
     @Column
-    private String name;
+    public String name;
 
     @Column
-    private String surname;
+    public String surname;
 
     @Column
-    private String email;
+    public Long phone;
 
     @Column
-    private Date birthDate;
+    public String email;
 
     @Column
-    private Boolean delegado;
+    public String relationship;
 
-    @Column
-    private String sex;
-
-    @ManyToOne
-    @JoinColumn(name = "classroom_id")
-    private Classroom classroom;
-
-    @ManyToOne
-    @JoinColumn(name ="legalGuardian_id")
-    private LegalGuardian legalguardian;
+    //@ManyToOne
+    //@JoinColumn(name = "student_id")
+    //private Student student;
 
 }

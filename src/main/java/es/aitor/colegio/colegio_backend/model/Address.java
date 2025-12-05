@@ -5,33 +5,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "teachers")
-public class Teacher {
+@Data
+public class Address {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
 
     @Column
-    private String name;
+    private String street;
 
     @Column
-    private String surname;
+    private String city;
 
     @Column
-    private String email;
-    
-    
+    private String postalCode;
 
+    @Column
+    private String province;
 
+    @Column
+    private String country;
 
     
 }

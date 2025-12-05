@@ -27,20 +27,42 @@ public class StudentService {
     }
 
     //PUT
-    public Student updateStudent(Long id, Student student){
+    public Student updateStudent(long id, Student student){
         Student studentExisting = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Estudiante con " + id + " no encontrado"));
         studentExisting.setName(student.getName());
         studentExisting.setSurname(student.getSurname());
         studentExisting.setEmail(student.getEmail());
         studentExisting.setBirthDate(student.getBirthDate());
         studentExisting.setDelegado(student.getDelegado());
+        studentExisting.setClassroom(student.getClassroom());
         return studentRepository.save(studentExisting);
     }
 
     //DELETE
-    public void deleteStudent(Long id, Student student){
+    public void deleteStudent(long id, Student student){
         studentRepository.deleteById(id);
     }
+
+    //GET sacar solo un estudiante por Id
+
+    public Student getStudent (long id, Student student){
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Estudiante con id " + id + ", no encontrado"));
+    }
+
+
+
+    //GET obtener todos los estudiantes que hay en un clase
+
+    //public List<Student> studentPerClass (Long id, Student student){
+
+        //if (Student
+
+        //}
+
+
+
+
+    //}
     
     
 }

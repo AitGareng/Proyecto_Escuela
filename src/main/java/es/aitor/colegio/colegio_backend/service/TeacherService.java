@@ -25,7 +25,7 @@ public class TeacherService {
     }
 
     // Put
-    public Teacher updateTeacher(Long id, Teacher teacher) {
+    public Teacher updateTeacher(long id, Teacher teacher) {
         Teacher teacherExisting = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Profesor con " + id + " no encontrado"));
         teacherExisting.setName(teacher.getName());
@@ -35,7 +35,7 @@ public class TeacherService {
     }
 
     // Detele
-    public void deleteTeacher(Long id, Teacher teacher) {
+    public void deleteTeacher(long id, Teacher teacher) {
         teacherRepository.deleteById(id);
     }
 
