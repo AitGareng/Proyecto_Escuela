@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.aitor.colegio.colegio_backend.model.Classroom;
+import es.aitor.colegio.colegio_backend.model.Student;
 import es.aitor.colegio.colegio_backend.repository.ClassroomRepository;
 
 @Service
@@ -38,6 +39,7 @@ public class ClassroomService {
         classroomRepository.deleteById(id);
     }
 
+    
     
 
 }

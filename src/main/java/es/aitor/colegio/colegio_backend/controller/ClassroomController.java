@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.aitor.colegio.colegio_backend.model.Classroom;
+import es.aitor.colegio.colegio_backend.model.Student;
 import es.aitor.colegio.colegio_backend.service.ClassroomService;
 
 @RestController
@@ -45,7 +46,10 @@ public class ClassroomController {
         return "El aula con " + id + ", fue eliminada con exito";
     }
 
-    
+    //@GetMapping("/{id}/students")
+    //public List<Student> getStudentsForClass(){
+      //return classroomService.getStudentsByClassroomId(0);
+    //}
 
     
 }

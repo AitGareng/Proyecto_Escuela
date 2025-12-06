@@ -2,6 +2,12 @@ package es.aitor.colegio.colegio_backend.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,9 +45,17 @@ public class Student {
     @Column
     private String sex;
 
+    @Column
+    private int age;
+
     @ManyToOne
-    @JoinColumn(name = "classroom_id")
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+    //@JsonIgnore
+    //@JsonManagedReference
+    //@JsonBackReference
+    @JoinColumn(name="classroom_id")
     private Classroom classroom;
+
 
     @ManyToOne
     @JoinColumn(name ="legalGuardian_id")

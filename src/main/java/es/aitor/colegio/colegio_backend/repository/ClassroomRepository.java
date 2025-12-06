@@ -10,5 +10,7 @@ import es.aitor.colegio.colegio_backend.model.Student;
 
 @Repository
 public interface ClassroomRepository extends JpaRepository<Classroom, Long> {
+
+   
     
 }
