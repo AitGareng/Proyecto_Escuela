@@ -5,15 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.aitor.colegio.colegio_backend.dto.NoteDTO;
+import es.aitor.colegio.colegio_backend.mapper.NoteMapper;
 import es.aitor.colegio.colegio_backend.model.Note;
-import es.aitor.colegio.colegio_backend.repository.NoteRespository;
+import es.aitor.colegio.colegio_backend.repository.NoteRepository;
 
 @Service
 
 public class NoteService {
 
     @Autowired
-    public NoteRespository noteRepository;
+    public NoteRepository noteRepository;
+
+    
+
+    //GET obtener notas por DTO
+    public List<NoteDTO> getAllNotesByDto(){
+        return noteRepository.findAll().stream().map(NoteMapper::toDTO).toList();
+    }
 
     //GET
     public List<Note> getAllNotes(){

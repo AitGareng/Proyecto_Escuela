@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.aitor.colegio.colegio_backend.dto.LegalGuardianDTO;
 import es.aitor.colegio.colegio_backend.model.LegalGuardian;
 import es.aitor.colegio.colegio_backend.service.LegalGuardianService;
 
@@ -21,6 +22,11 @@ public class LegalGuardianController {
 
     @Autowired
     public LegalGuardianService legalGuardianService;
+
+    @GetMapping("/dto")
+    public List<LegalGuardianDTO> getAllLegalGuardianByDto(){
+        return legalGuardianService.getAllLegalGuardiansByDto();
+    }
 
     @GetMapping
     public List<LegalGuardian> getAllLegalGuardia() {

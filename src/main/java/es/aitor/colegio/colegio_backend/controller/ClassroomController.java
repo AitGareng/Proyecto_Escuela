@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.aitor.colegio.colegio_backend.dto.ClassroomDTO;
 import es.aitor.colegio.colegio_backend.model.Classroom;
-import es.aitor.colegio.colegio_backend.model.Student;
 import es.aitor.colegio.colegio_backend.service.ClassroomService;
 
 @RestController
@@ -31,8 +30,8 @@ public class ClassroomController {
     }
 
     @PostMapping
-    public Classroom saveClasrrom(@RequestBody Classroom classroom){
-    return classroomService.saveClassroom(classroom);
+    public Classroom createClassroom(@RequestBody Classroom classroom){
+    return classroomService.createClassroom(classroom);
     }
 
     @PutMapping("/{id}")
@@ -45,6 +44,12 @@ public class ClassroomController {
         classroomService.deleteClassroom(id, null);
         return "El aula con " + id + ", fue eliminada con exito";
     }
+
+    @GetMapping("/dto")
+    public List<ClassroomDTO> getAllClassroomByDto(){
+        return classroomService.getAllClassroomByDTO();
+    }
+
 
     //@GetMapping("/{id}/students")
     //public List<Student> getStudentsForClass(){

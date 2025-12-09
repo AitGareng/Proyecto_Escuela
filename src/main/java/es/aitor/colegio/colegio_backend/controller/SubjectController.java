@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.aitor.colegio.colegio_backend.dto.SubjectDTO;
 import es.aitor.colegio.colegio_backend.model.Subject;
 import es.aitor.colegio.colegio_backend.service.SubjectService;
 
@@ -23,6 +23,11 @@ public class SubjectController {
     @Autowired
     public SubjectService subjectService;
 
+    @GetMapping("/dto")
+    public List<SubjectDTO> getAllSubjectByDto(){
+        return subjectService.getAllSubjectsByDto();
+    }
+
     @GetMapping
     public List<Subject> getAllSubjects(){
         return subjectService.getAllSubjects();
@@ -30,7 +35,7 @@ public class SubjectController {
 
     @PostMapping
     public Subject createSubject(@RequestBody Subject subject){
-        Subject saveSubject = subjectService.saveNewSubject(subject);
+        Subject saveSubject = subjectService.createSubject(subject);
         return saveSubject;
     }
 

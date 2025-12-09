@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.aitor.colegio.colegio_backend.dto.NoteDTO;
 import es.aitor.colegio.colegio_backend.model.Note;
 import es.aitor.colegio.colegio_backend.service.NoteService;
 
@@ -21,6 +22,11 @@ public class NoteController {
 
     @Autowired
     public NoteService noteService;
+
+    @GetMapping("/dto")
+    public List<NoteDTO> getAllNotesByDto(){
+        return noteService.getAllNotesByDto();
+    }
 
     @GetMapping
     public List<Note> getAllNotes(){

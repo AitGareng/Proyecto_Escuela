@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.aitor.colegio.colegio_backend.dto.LegalGuardianDTO;
+import es.aitor.colegio.colegio_backend.mapper.LegalGuardianMapper;
 import es.aitor.colegio.colegio_backend.model.LegalGuardian;
 import es.aitor.colegio.colegio_backend.repository.LegalGuardianRepository;
 
@@ -14,6 +16,14 @@ public class LegalGuardianService {
 
     @Autowired
     public LegalGuardianRepository legalGuardianRepository;
+
+    //GET obtener todos lo tutores de menores por DTO
+    public List<LegalGuardianDTO> getAllLegalGuardiansByDto(){
+        return legalGuardianRepository.findAll()
+            .stream()
+            .map(LegalGuardianMapper::toDTO)
+            .toList();
+    }
 
     // GET
     public List<LegalGuardian> getAllLegalGuardians() {

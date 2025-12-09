@@ -1,5 +1,7 @@
 package es.aitor.colegio.colegio_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,13 +28,14 @@ public class Subject {
     @Column
     private String description;
 
-    @ManyToOne
-    @JoinColumn (name = "teacher_id")
-    private Teacher teacher;
+   @ManyToOne
+   @JoinColumn (name = "teacher_id")
+   @JsonBackReference
+   private Teacher teacher;
 
-    @ManyToOne
-    @JoinColumn(name= "classroom_id")
-    private Classroom classroom;
+    //@ManyToOne
+    //@JoinColumn(name= "classroom_id")
+    //private Classroom classroom;
 
     
 

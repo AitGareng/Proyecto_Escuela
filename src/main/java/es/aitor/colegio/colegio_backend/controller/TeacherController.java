@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.aitor.colegio.colegio_backend.dto.TeacherDTO;
 import es.aitor.colegio.colegio_backend.model.Teacher;
 import es.aitor.colegio.colegio_backend.service.TeacherService;
 
@@ -21,6 +22,11 @@ public class TeacherController {
 
     @Autowired
     public TeacherService teacherService;
+
+    @GetMapping("/dto")
+    public List<TeacherDTO> getAllTeachersByDto(){
+        return teacherService.getlAllTeachersByDTO();
+    }
 
     @GetMapping
     public List<Teacher> getAllTeachers(){

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.aitor.colegio.colegio_backend.dto.AddressDTO;
 import es.aitor.colegio.colegio_backend.model.Address;
 import es.aitor.colegio.colegio_backend.service.AddressService;
 
@@ -22,6 +23,11 @@ public class AddressController {
 
     @Autowired
     private AddressService addressService;
+
+    @GetMapping("/dto")
+    public List<AddressDTO> getAllAddressByDto(){
+        return addressService.getAllAddressByDto();
+    }
 
     @GetMapping
     public List<Address> getAllAddress(){

@@ -31,5 +31,4 @@ public class Address {
     @Column
     private String country;
 
-    
 }

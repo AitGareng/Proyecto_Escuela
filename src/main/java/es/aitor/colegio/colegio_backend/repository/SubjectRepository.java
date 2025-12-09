@@ -7,5 +7,7 @@ import es.aitor.colegio.colegio_backend.model.Subject;
 
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long>{
+
+    //long countByTeacherId(Long teacherId);
     
 }

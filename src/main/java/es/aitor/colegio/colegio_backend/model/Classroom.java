@@ -35,14 +35,17 @@ public class Classroom {
     @Column
     private String stage;
 
+    @Column
+    private Integer year;
+
    // @Column
     //private int totalStudentsClass;
 
-    @OneToMany(mappedBy = "classroom")
-    @JsonIgnore
+    //OneToMany(mappedBy = "classroom")
+    //@JsonIgnore
     //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
     //@JsonBackReference
     //@JsonBackReference
-    private List<Student> students;
+   //private List<Student> students;
     
 }

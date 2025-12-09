@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.aitor.colegio.colegio_backend.dto.AddressDTO;
+import es.aitor.colegio.colegio_backend.mapper.AddressMapper;
 import es.aitor.colegio.colegio_backend.model.Address;
 import es.aitor.colegio.colegio_backend.repository.AddressRepository;
 
@@ -14,6 +16,14 @@ public class AddressService {
     
     @Autowired
     private AddressRepository addressRepository;
+
+    //GET obtener todas la direcciones mediante DTO
+    public List<AddressDTO> getAllAddressByDto(){
+        return addressRepository.findAll()
+            .stream()
+            .map(AddressMapper::toDTO)
+            .toList();
+    }
 
     //GET
     public List<Address> getAllAddress(){

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.aitor.colegio.colegio_backend.dto.SubjectDTO;
+import es.aitor.colegio.colegio_backend.mapper.SubjectMapper;
 import es.aitor.colegio.colegio_backend.model.Subject;
 import es.aitor.colegio.colegio_backend.repository.SubjectRepository;
 
@@ -14,13 +16,22 @@ public class SubjectService {
     @Autowired
     public SubjectRepository subjectRepository;
 
+    //Get obtener asignaturas por DTO
+    public List<SubjectDTO> getAllSubjectsByDto(){
+        return subjectRepository.findAll()
+            .stream()
+            .map(SubjectMapper::toDTO)
+            .toList();
+    }
+
+
     // GET
     public List<Subject> getAllSubjects() {
         return subjectRepository.findAll();
     }
 
     // POST
-    public Subject saveNewSubject(Subject subject) {
+    public Subject createSubject(Subject subject) {
         return subjectRepository.save(subject);
     }
 
@@ -30,7 +41,7 @@ public class SubjectService {
         subjectExisting.setName(subject.getName());
         subjectExisting.setDescription(subject.getDescription());
         subjectExisting.setTeacher(subject.getTeacher());
-        subjectExisting.setClassroom(subject.getClassroom());
+        //subjectExisting.setClassroom(subject.getClassroom());
 
         return subjectRepository.save(subjectExisting);
     }

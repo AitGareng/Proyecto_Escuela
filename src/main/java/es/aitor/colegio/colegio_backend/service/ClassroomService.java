@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.aitor.colegio.colegio_backend.dto.ClassroomDTO;
+import es.aitor.colegio.colegio_backend.mapper.ClassroomMapper;
 import es.aitor.colegio.colegio_backend.model.Classroom;
 import es.aitor.colegio.colegio_backend.model.Student;
 import es.aitor.colegio.colegio_backend.repository.ClassroomRepository;
+
 
 @Service
 public class ClassroomService {
@@ -15,13 +18,21 @@ public class ClassroomService {
     @Autowired
     public ClassroomRepository classroomRepository;
 
+    //Get obtener Classroom por DTO
+    public List<ClassroomDTO> getAllClassroomByDTO(){
+        return classroomRepository.findAll()
+            .stream()
+            .map(ClassroomMapper::toDTO)
+            .toList();
+    }
+
     // Get
     public List<Classroom> GetAllClassroom() {
         return classroomRepository.findAll();
     }
 
     // Post
-    public Classroom saveClassroom(Classroom classroom) {
+    public Classroom createClassroom(Classroom classroom) {
         return classroomRepository.save(classroom);
     }
 
