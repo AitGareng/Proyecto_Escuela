@@ -6,15 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.aitor.colegio.colegio_backend.dto.SubjectDTO;
+import es.aitor.colegio.colegio_backend.dto.TeacherDTO;
 import es.aitor.colegio.colegio_backend.mapper.SubjectMapper;
+import es.aitor.colegio.colegio_backend.mapper.TeacherMapper;
 import es.aitor.colegio.colegio_backend.model.Subject;
+import es.aitor.colegio.colegio_backend.model.Teacher;
 import es.aitor.colegio.colegio_backend.repository.SubjectRepository;
+import es.aitor.colegio.colegio_backend.repository.TeacherRepository;
 
 @Service
 public class SubjectService {
 
     @Autowired
     public SubjectRepository subjectRepository;
+    public TeacherRepository teacherRepository;
 
     //Get obtener asignaturas por DTO
     public List<SubjectDTO> getAllSubjectsByDto(){
@@ -22,6 +27,19 @@ public class SubjectService {
             .stream()
             .map(SubjectMapper::toDTO)
             .toList();
+    }
+
+
+        //POST
+    public TeacherDTO asignedSubjectTeacher(Long teacherId, Subject subject){
+        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(() -> new RuntimeException("No se encuentra el profesor"));
+        long currentCount = subjectRepository.countByTeacherId(teacherId);
+        
+        if ( currentCount >= 2){
+            throw new RuntimeException("No se puede asignar la asignatura al profesor");
+        }
+        return TeacherMapper.toDTO(teacher);
+        
     }
 
 
@@ -50,6 +68,10 @@ public class SubjectService {
     public void deleteSubject(long id, Subject subject) {
         subjectRepository.deleteById(id);
     }
+
+   
+
+
 
     
 

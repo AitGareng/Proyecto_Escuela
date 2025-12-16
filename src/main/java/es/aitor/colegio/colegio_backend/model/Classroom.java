@@ -2,12 +2,6 @@ package es.aitor.colegio.colegio_backend.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +31,9 @@ public class Classroom {
 
     @Column
     private Integer year;
+
+     @OneToMany(mappedBy = "classroom")
+    private List<Student> students;
 
    // @Column
     //private int totalStudentsClass;

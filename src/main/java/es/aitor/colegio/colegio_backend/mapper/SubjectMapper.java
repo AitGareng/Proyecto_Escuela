@@ -18,10 +18,10 @@ public class SubjectMapper {
            // dto.setClassroomName(subject.getClassroom().getName());
         //}
 
-        if(subject.getTeacher() != null){
-           dto.setTeacherid(subject.getTeacher().getId());
-            dto.setTeacherName(subject.getTeacher().getName());
-        }
+        //if(subject.getTeacher() != null){
+           //dto.setTeacherid(subject.getTeacher().getId());
+            //dto.setTeacherName(subject.getTeacher().getName());
+        //}
 
         return dto;
     }

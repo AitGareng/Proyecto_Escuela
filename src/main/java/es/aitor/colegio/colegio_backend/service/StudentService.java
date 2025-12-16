@@ -2,13 +2,12 @@ package es.aitor.colegio.colegio_backend.service;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import es.aitor.colegio.colegio_backend.repository.NoteRepository;
 import es.aitor.colegio.colegio_backend.repository.StudentRepository;
 import es.aitor.colegio.colegio_backend.model.Classroom;
-import es.aitor.colegio.colegio_backend.model.Note;
 import es.aitor.colegio.colegio_backend.model.Student;
 import es.aitor.colegio.colegio_backend.dto.StudentDTO;
 import es.aitor.colegio.colegio_backend.dto.StudentFilterDTO;
@@ -21,6 +20,8 @@ public class StudentService {
     public StudentRepository studentRepository;
     @Autowired
     public NoteRepository noteRepository;
+    @Autowired
+    public ModelMapper modelMapper;
 
     // GET lista de todos los estudiantes
     public List<Student> getAllStudents() {
@@ -97,6 +98,16 @@ public class StudentService {
     }
 
     
+    
+    
+
+
+
+
+
+
+
+
 
     // =================
     // Con Chat GPT:

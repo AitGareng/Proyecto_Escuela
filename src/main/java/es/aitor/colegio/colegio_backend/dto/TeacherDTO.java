@@ -11,12 +11,11 @@ public class TeacherDTO {
 
     public Long id;
     public String name;
-    public String surname;
+    //public String surname;
     public String email;
-    
-    private List<SubjectDTO> subjects;
-    private Long subjectId;
-    private String subjectName;
+    public List<SubjectDTO> subjects;
+    //private Long subjectId;
+    //private String subjectName;
     
 
 

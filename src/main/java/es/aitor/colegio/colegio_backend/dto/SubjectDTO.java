@@ -10,11 +10,11 @@ public class SubjectDTO {
     public String description;
     
 
-    private Long teacherid;
-    private String teacherName;
+    //private Long teacherid;
+    //private String teacherName;
 
-    private Long classroomId;
-    private String classroomName;
+    //private Long classroomId;
+   //private String classroomName;
 
 
     

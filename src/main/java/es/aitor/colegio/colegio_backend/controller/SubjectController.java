@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import es.aitor.colegio.colegio_backend.dto.SubjectDTO;
 import es.aitor.colegio.colegio_backend.model.Subject;
 import es.aitor.colegio.colegio_backend.service.SubjectService;
+import es.aitor.colegio.colegio_backend.service.TeacherService;
 
 @RestController
 @RequestMapping("/subject")
@@ -22,6 +22,7 @@ public class SubjectController {
 
     @Autowired
     public SubjectService subjectService;
+    public TeacherService teacherService;
 
     @GetMapping("/dto")
     public List<SubjectDTO> getAllSubjectByDto(){
@@ -39,6 +40,12 @@ public class SubjectController {
         return saveSubject;
     }
 
+    /*@PutMapping("/teachers/{teacherId}/subjects/{subjectId}")
+    public TeacherDTO assignSubject(@PathVariable Long teacherId, @RequestBody Subject subject) {
+        teacherSubject = teacherService.getSubjects;
+        return subjectService.asignedSubjectTeacher(teacherId, subject);
+    }
+*/
     @PutMapping("/{id}")
     public Subject updateSubject(@PathVariable Long id, @RequestBody Subject subject){
         return subjectService.updateSubject(id, subject);
@@ -49,8 +56,5 @@ public class SubjectController {
         subjectService.deleteSubject(id, null);
         return "La asignatura con id " + id + ", fue eliminado correctamente";
     }
-
-    
-    
     
 }

@@ -11,22 +11,22 @@ public class StudentMapper {
 
         dto.setId(student.getId());
         dto.setName(student.getName());
-        dto.setSurname(student.getSurname());
-        dto.setEmail(student.getEmail());
-        dto.setBirthDate(student.getBirthDate());
-        dto.setDelegado(student.getDelegado());
-        dto.setSex(student.getSex());
+        //dto.setSurname(student.getSurname());
+        //dto.setEmail(student.getEmail());
+        //dto.setBirthDate(student.getBirthDate());
+        //dto.setDelegado(student.getDelegado());
+        //dto.setSex(student.getSex());
         dto.setAge(student.getAge());
-        dto.setAverage_grade(student.getAverage_grade());
+        //dto.setAverage_grade(student.getAverage_grade());
 
-         if (student.getClassroom() != null) {
-            dto.setClassroomId(student.getClassroom().getId());
-            dto.setClassroomName(student.getClassroom().getName());
-        }
+         //if (student.getClassroom() != null) {
+           // dto.setClassroomId(student.getClassroom().getId());
+            //dto.setClassroomName(student.getClassroom().getName());
+       // }
 
         if (student.getLegalguardian() != null) {
-            dto.setLegalGuardianId(student.getLegalguardian().getId());
-            dto.setLegalGuardianName(student.getLegalguardian().getName());
+            //dto.setLegalGuardianId(student.getLegalguardian().getId());
+            //dto.setLegalGuardianName(student.getLegalguardian().getName());
         }
 
         return dto;

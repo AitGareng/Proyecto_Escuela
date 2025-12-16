@@ -12,17 +12,18 @@ import es.aitor.colegio.colegio_backend.model.Teacher;
 public class TeacherMapper {
 
     public static TeacherDTO toDTO(Teacher teacher){
-        TeacherDTO dto = new TeacherDTO();
+        if (teacher == null) return null;
 
+        TeacherDTO dto = new TeacherDTO();
         dto.setId(teacher.getId());
         dto.setName(teacher.getName());
-        dto.setSurname(teacher.getSurname());
+        //dto.setSurname(teacher.getSurname());
         dto.setEmail(teacher.getEmail());
         
        List<SubjectDTO> subjectDTOs = new ArrayList<>();
 
-        if(teacher.getSubject() !=null){
-            for(Subject subject : teacher.getSubject()){
+        if(teacher.getSubjects() !=null){
+            for(Subject subject : teacher.getSubjects()){
                 SubjectDTO subjectDto = SubjectMapper.toDTO(subject);
                 subjectDTOs.add(subjectDto);
             }
@@ -31,5 +32,18 @@ public class TeacherMapper {
 
         return dto;
     }
+
+    public static Teacher toEntity(TeacherDTO dto) {
+    if (dto == null) return null;
+
+    Teacher teacher = new Teacher();
+    teacher.setId(dto.getId());
+    teacher.setName(dto.getName());
+    //teacher.setSurname(dto.getSurname());
+    teacher.setEmail(dto.getEmail());
+
+    return teacher;
+    }
+    
     
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import es.aitor.colegio.colegio_backend.dto.TeacherDTO;
 import es.aitor.colegio.colegio_backend.model.Teacher;
 import es.aitor.colegio.colegio_backend.service.TeacherService;
@@ -23,25 +22,26 @@ public class TeacherController {
     @Autowired
     public TeacherService teacherService;
 
-    @GetMapping("/dto")
-    public List<TeacherDTO> getAllTeachersByDto(){
-        return teacherService.getlAllTeachersByDTO();
-    }
-
     @GetMapping
-    public List<Teacher> getAllTeachers(){
-        return teacherService.getAllTeachers();
+    public List<TeacherDTO> getAllTeachersByDto(){
+        return teacherService.getAllTeachersByDTO();
     }
 
     @PostMapping
-    public Teacher createTeacher(@RequestBody Teacher teacher){
-        Teacher saveTeacher = teacherService.createTeacher(teacher);
+    public Teacher createNewTeacher(@RequestBody Teacher teacher){
+        Teacher  saveTeacher = teacherService.createNewTeacher(teacher);
+        return saveTeacher;
+    }
+    
+    @PostMapping("/CrearHibrido")//crear un nuevo Teacher y asignar una asignatura YA existente.
+    public TeacherDTO createTeacher(@RequestBody TeacherDTO teacherDTO){
+        TeacherDTO saveTeacher = teacherService.createTeacher(teacherDTO);
         return saveTeacher;
     }
 
     @PutMapping("/{id}")
-    public Teacher updateTeacher(@PathVariable Long id, @RequestBody Teacher teacher){
-        return teacherService.updateTeacher(id, teacher);
+    public TeacherDTO updateTeacher(@PathVariable Long id, @RequestBody TeacherDTO teacherDTO){
+        return teacherService.updateTeacherByDTO(id, teacherDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -49,5 +49,26 @@ public class TeacherController {
     teacherService.deleteTeacher(id, null);
     return "Profesor con id, " + id + " , eliminado correctamente";
     }
+
+    @DeleteMapping("/dto/{id}")
+    public String deleteTeacherByDTO(@PathVariable Long id){
+        teacherService.deleteTeacherByDTO(id, null);
+        return "Profesor con id, " + id + " , eliminado correctamente";
+    }
     
+    @PutMapping("/prueba/{id}")
+    public String updateAndVerifySubjectsTeacher(@PathVariable Long id, @RequestBody Teacher teacher){
+        return teacherService.updateAndVerifySubjectsTeacher(id, teacher);
+    }
+
+    @PostMapping("/pruebaCrear")
+    public TeacherDTO createTeacherDTO(@RequestBody TeacherDTO teacherDTO){
+        TeacherDTO teacherSavedDTO = teacherService.createTeacherDto(teacherDTO);
+        return teacherSavedDTO;
+    }
+
+    @PutMapping("/prueba2/{id}")
+    public String updateTeacherDto(@PathVariable Long id, @RequestBody TeacherDTO teacherDTO){
+        return teacherService.updateTeacherDto(id, teacherDTO);
+    }
 }
