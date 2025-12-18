@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.aitor.colegio.colegio_backend.dto.NoteDTO;
+import es.aitor.colegio.colegio_backend.dto.StudentDTO;
 import es.aitor.colegio.colegio_backend.mapper.NoteMapper;
+import es.aitor.colegio.colegio_backend.mapper.StudentMapper;
 import es.aitor.colegio.colegio_backend.model.Note;
+import es.aitor.colegio.colegio_backend.model.Student;
 import es.aitor.colegio.colegio_backend.repository.NoteRepository;
+import es.aitor.colegio.colegio_backend.repository.StudentRepository;
 
 @Service
 
@@ -16,6 +20,7 @@ public class NoteService {
 
     @Autowired
     public NoteRepository noteRepository;
+    public StudentRepository studentRepository;
 
     
 
@@ -47,5 +52,16 @@ public class NoteService {
     public void deleteNote(long id, Note note){
         noteRepository.deleteById(id);
     }
+
+
+    //GET devolver un unico estudiante con sus notas
+    public NoteDTO getAllNotesForStudentDTO(Long id){
+        Note note = noteRepository.findById(id).orElseThrow(() -> new RuntimeException("Estudiante con " + id + " no encontrado"));
+        NoteDTO dto = NoteMapper.toDTO(note);
+        return dto;
+
+
+    }
+  
     
 }

@@ -5,13 +5,13 @@ import lombok.Data;
 @Data
 public class NoteDTO {
 
-    private Long id;
+    //private Long id;
     private Double valor;
 
-    private Long StudentId;
-    private String StudentName;
+    //private Long StudentId;
+   // private String StudentName;    
 
-    private Long SubjectId;
+    //private Long SubjectId;
     private String SubjectName;
 
 

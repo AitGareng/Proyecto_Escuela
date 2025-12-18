@@ -1,7 +1,7 @@
 package es.aitor.colegio.colegio_backend.model;
 
 import java.sql.Date;
-
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,8 +10,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+
 
 @Data
 @Entity
@@ -47,11 +49,14 @@ public class Student {
     private Double average_grade;
 
     @ManyToOne
-    @JoinColumn(name="classroom_id")
+    @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
     @ManyToOne
-    @JoinColumn(name ="legalGuardian_id")
+    @JoinColumn(name = "legalGuardian_id")
     private LegalGuardian legalguardian;
+
+    @OneToMany(mappedBy = "student")
+    private List<Note> notes;
 
 }

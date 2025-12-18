@@ -12,7 +12,7 @@ public class ClassroomDTO {
     private List<StudentDTO> students;
     //private String course;
     //private String stage;
-   // private Integer year;
+    private Integer year;
 
 
     

@@ -8,17 +8,17 @@ public class NoteMapper {
     public static NoteDTO toDTO(Note note){
         NoteDTO dto = new NoteDTO();
 
-        dto.setId(note.getId());
+        //dto.setId(note.getId());
         dto.setValor(note.getValor());
 
-        if(note.getStudent() !=null){
-            dto.setStudentId(note.getStudent().getId());
-            dto.setStudentName(note.getStudent().getName());
-        }
+       // if(note.getStudent() !=null){
+         //   dto.setStudentId(note.getStudent().getId());
+           // dto.setStudentName(note.getStudent().getName());
+        //}
 
         if(note.getSubject() !=null){
-            dto.setSubjectId(note.getSubject().getId());
-            dto.setSubjectName(note.getSubject().getName());
+         // dto.setSubjectId(note.getSubject().getId());
+        dto.setSubjectName(note.getSubject().getName());
         }
 
         return dto;

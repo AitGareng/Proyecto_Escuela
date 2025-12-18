@@ -1,5 +1,6 @@
 package es.aitor.colegio.colegio_backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -8,9 +9,13 @@ import org.springframework.stereotype.Service;
 import es.aitor.colegio.colegio_backend.repository.NoteRepository;
 import es.aitor.colegio.colegio_backend.repository.StudentRepository;
 import es.aitor.colegio.colegio_backend.model.Classroom;
+import es.aitor.colegio.colegio_backend.model.Note;
 import es.aitor.colegio.colegio_backend.model.Student;
+import es.aitor.colegio.colegio_backend.model.Teacher;
+import es.aitor.colegio.colegio_backend.dto.NoteDTO;
 import es.aitor.colegio.colegio_backend.dto.StudentDTO;
 import es.aitor.colegio.colegio_backend.dto.StudentFilterDTO;
+import es.aitor.colegio.colegio_backend.dto.TeacherDTO;
 import es.aitor.colegio.colegio_backend.mapper.StudentMapper;
 
 @Service
@@ -97,9 +102,57 @@ public class StudentService {
         return studentRepository.findAll().stream().map(StudentMapper::toDTO).toList();
     }
 
+      //GET obtener lista estudiantes de 2025
+    public List<StudentDTO> studentsOf2025(){
+        List<Student> students = studentRepository.findAll();
+        List<StudentDTO> result = new ArrayList<>();
+
+        for (Student student : students){
+            if(student.getClassroom() != null && student.getClassroom().getYear()==2025){
+
+                double suma = 0;
+                int contador = 0;
+
+                if(student.getNotes() !=null){
+                    for (Note note : student.getNotes()){
+                        if(note != null && note.getValor() != null){
+                            suma += note.getValor();
+                            contador++;
+                        }
+                    }
+                }
+                Double media = (contador == 0) ? 0 : (suma/contador);
+                student.setAverage_grade(media);
+
+                StudentDTO dto = StudentMapper.toDTO(student);
+            result.add(dto);
+            }
+        
+        }
+        return result;
+        
+    }
+
+    /*private Teacher convertToEntity(TeacherDTO teacherDTO) {
+        return modelMapper.map(teacherDTO, Teacher.class);
+    }
+
+    private TeacherDTO convertToDto(Teacher teacher) {
+        return modelMapper.map(teacher, TeacherDTO.class);
+    }*/
     
     
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
 

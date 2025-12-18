@@ -18,7 +18,7 @@ import es.aitor.colegio.colegio_backend.repository.TeacherRepository;
 @Service
 public class TeacherService {
 
-    @Autowired
+    @Autowired //Para inyecy
     public TeacherRepository teacherRepository;
 
     @Autowired
@@ -178,5 +178,36 @@ public class TeacherService {
         // teacher = teacherRepository.save(teacher);
 
     }
+
+     // PUT con DTO asignar una asignatura a un profesor
+    public TeacherDTO updateTeacherDto2(Long id, TeacherDTO teacherDTO) {
+        Teacher teacherExisting2 = teacherRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Profesor con id  " + id + " no encontrado"));
+
+        if (teacherExisting2.getSubjects().size() >= 2) {
+            throw new IllegalStateException("Este profesor ya tiene 2 asignaturas. No se pueden agregar mas.");
+
+        } else {
+            teacherExisting2.setName(teacherDTO.getName());
+            teacherExisting2.setEmail(teacherDTO.getEmail());
+            teacherRepository.save(teacherExisting2);
+
+            Long subjectId = teacherDTO.getSubjects().get(0).getId();
+
+            Subject subjectDb = subjectRepository.findById(subjectId)
+                    .orElseThrow(() -> new RuntimeException("Asignatura con id " + subjectId + " no encontrada"));
+
+            subjectDb.setTeacher(teacherExisting2);
+
+            subjectRepository.save(subjectDb);
+                
+        }
+        return TeacherMapper.toDTO(teacherExisting2);
+    }
+
+        // Teacher teacher = this.convertToEntity(teacherDTO);
+        // teacher = teacherRepository.save(teacher);
+
+     
 
 }

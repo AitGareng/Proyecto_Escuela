@@ -28,6 +28,11 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @GetMapping("/dto") //obtener todos los students por dto (funcionando)
+    public List<StudentDTO> getAllStudentsByDTO() {
+        return studentService.getAllStudentsByDTO();
+    }
+
     @GetMapping //obtener todos los student
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
@@ -101,11 +106,6 @@ public class StudentController {
         return studentService.getStudentByParameters(name, surname, sex);
     }
 
-    @GetMapping("/dto") //obtener todos los students por dto
-    public List<StudentDTO> getAllStudentsByDTO() {
-        return studentService.getAllStudentsByDTO();
-    }
-
     @GetMapping("/filter") //filtrar students por parametros
     public List<StudentDTO> getStudentsFiltered(
             @RequestParam(required = false) String name,
@@ -114,6 +114,12 @@ public class StudentController {
             @RequestParam(required = false) Long classroomId) {
 
         return studentService.getStudentFiltered(name, surname, sex, classroomId);
+    }
+
+    @GetMapping("/2025")
+    public List<StudentDTO> studentsOf2025(){
+        return studentService.studentsOf2025();
+
     }
 
 }

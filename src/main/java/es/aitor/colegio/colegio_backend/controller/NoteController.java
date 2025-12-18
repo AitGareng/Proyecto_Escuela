@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.aitor.colegio.colegio_backend.dto.NoteDTO;
+import es.aitor.colegio.colegio_backend.dto.StudentDTO;
 import es.aitor.colegio.colegio_backend.model.Note;
 import es.aitor.colegio.colegio_backend.service.NoteService;
 
@@ -49,6 +50,11 @@ public class NoteController {
     public String deleteNote(@PathVariable Long id){
         noteService.deleteNote(id, null);
         return "La nota con id " + id + ", fue eliminada correctamente";
+    }
+
+    @GetMapping("/studentNotes/{id}")
+    public NoteDTO getAllNotesForStudentDTO(@PathVariable Long id){
+        return noteService.getAllNotesForStudentDTO(id);
     }
 
     

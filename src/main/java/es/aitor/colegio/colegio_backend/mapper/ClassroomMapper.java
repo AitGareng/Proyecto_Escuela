@@ -19,7 +19,7 @@ public class ClassroomMapper {
         dto.setName(classroom.getName());
         // dto.setCourse(classroom.getCourse());
         // dto.setStage(classroom.getStage());
-        // dto.setYear(classroom.getYear());
+        dto.setYear(classroom.getYear());
 
         List<StudentDTO> studentDTOs = new ArrayList<>();
 
@@ -42,7 +42,7 @@ public class ClassroomMapper {
         Classroom classroom = new Classroom();
         classroom.setId(dto.getId());
         classroom.setName(dto.getName());
-       // classroom.setStudents(dto.getStudents());
+       //classroom.setStudents(dto.getStudents());
         return classroom;
 
     }
