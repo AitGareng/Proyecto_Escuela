@@ -20,8 +20,9 @@ public class StudentMapper {
         // dto.setBirthDate(student.getBirthDate());
         dto.setDelegado(student.getDelegado());
         // dto.setSex(student.getSex());
-        // dto.setAge(student.getAge());
+         dto.setAge(student.getAge());
         dto.setAverage_grade(student.getAverage_grade());
+        //dto.setAverage_age_delegate(student.getAverage_age_delegate());
 
 
        List<NoteDTO> noteDTOs = new ArrayList<>();

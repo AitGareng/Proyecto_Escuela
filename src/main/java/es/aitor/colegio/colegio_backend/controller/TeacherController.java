@@ -56,19 +56,24 @@ public class TeacherController {
         return "Profesor con id, " + id + " , eliminado correctamente";
     }
     
-    @PutMapping("/prueba/{id}")
+    @PutMapping("/agregarSubject/{id}") //no cambia teacher, solo agrega asignatura
     public String updateAndVerifySubjectsTeacher(@PathVariable Long id, @RequestBody Teacher teacher){
         return teacherService.updateAndVerifySubjectsTeacher(id, teacher);
     }
 
-    @PostMapping("/pruebaCrear")
+    @PostMapping("/CrearByDTO")
     public TeacherDTO createTeacherDTO(@RequestBody TeacherDTO teacherDTO){
         TeacherDTO teacherSavedDTO = teacherService.createTeacherDto(teacherDTO);
         return teacherSavedDTO;
     }
 
-    @PutMapping("/prueba2/{id}")
+    @PutMapping("/updateByDTO/{id}")
     public String updateTeacherDto(@PathVariable Long id, @RequestBody TeacherDTO teacherDTO){
-        return teacherService.updateTeacherDto(id, teacherDTO);
+        return teacherService.updateTeacherDtoByString(id, teacherDTO);
+    }
+
+    @PutMapping("/updateTeacherbyDTO/{id}")
+    public TeacherDTO updateTeacherDto(@PathVariable TeacherDTO teacherDTO){
+        return teacherService.createTeacherDto(teacherDTO);
     }
 }

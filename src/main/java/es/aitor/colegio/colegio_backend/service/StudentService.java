@@ -28,6 +28,18 @@ public class StudentService {
     @Autowired
     public ModelMapper modelMapper;
 
+    // GET listar todos los estudiantes por DTO
+    public List<StudentDTO> getAllStudentsByDTO() {
+        List<Student> students = studentRepository.findAll();
+        List<StudentDTO> result = new ArrayList<>();
+
+        for (Student student : students) {
+            StudentDTO dto = StudentMapper.toDTO(student);
+            result.add(dto);
+        }
+        return result;
+    }
+
     // GET lista de todos los estudiantes
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -97,70 +109,119 @@ public class StudentService {
         return studentRepository.findStudentByNameAndSurnameAndSex(name, surname, sex);
     }
 
-    // GET Listar student mediante DTO
-    public List<StudentDTO> getAllStudentsByDTO() {
+    // GET Listar student mediante DTO /// HECHO CON STREAM NO USAR ///
+    public List<StudentDTO> getAllStudentsByDTOStream() {
         return studentRepository.findAll().stream().map(StudentMapper::toDTO).toList();
     }
 
-      //GET obtener lista estudiantes de 2025
-    public List<StudentDTO> studentsOf2025(){
+    // GET obtener lista estudiantes de 2025
+    public List<StudentDTO> studentsOf2025() {
         List<Student> students = studentRepository.findAll();
         List<StudentDTO> result = new ArrayList<>();
 
-        for (Student student : students){
-            if(student.getClassroom() != null && student.getClassroom().getYear()==2025){
+        for (Student student : students) {
+            if (student.getClassroom() != null && student.getClassroom().getYear() == 2025) {
 
                 double suma = 0;
                 int contador = 0;
 
-                if(student.getNotes() !=null){
-                    for (Note note : student.getNotes()){
-                        if(note != null && note.getValor() != null){
+                if (student.getNotes() != null) {
+                    for (Note note : student.getNotes()) {
+                        if (note != null && note.getValor() != null) {
                             suma += note.getValor();
                             contador++;
                         }
                     }
                 }
-                Double media = (contador == 0) ? 0 : (suma/contador);
+                Double media = (contador == 0) ? null : (suma / contador);
                 student.setAverage_grade(media);
 
                 StudentDTO dto = StudentMapper.toDTO(student);
-            result.add(dto);
+                result.add(dto);
             }
-        
+
         }
         return result;
-        
+
     }
 
-    /*private Teacher convertToEntity(TeacherDTO teacherDTO) {
-        return modelMapper.map(teacherDTO, Teacher.class);
+    // GET Edad promedio de delegados por curso
+    public Double averageAgeDelegateByDTO() {
+        List<Student> students = studentRepository.findAll();
+        int suma = 0;
+        int contador = 0;
+
+        for (Student student : students) {
+            if (student.getClassroom() != null && student.getClassroom().getYear() == 2025
+                    && student.getDelegado() == true) {
+
+                suma += student.getAge();
+                contador++;
+
+            }
+
+        }
+        return (contador == 0) ? null : (double) suma / contador;
+
     }
 
-    private TeacherDTO convertToDto(Teacher teacher) {
-        return modelMapper.map(teacher, TeacherDTO.class);
-    }*/
-    
-    
+    // GET calculo de notas medias por año y genero
+    public Double averageRatingsBySex(String sex) {
+        List<Student> students = studentRepository.findAll();
+        Double suma = 0.0;
+        Double contador = 0.0;
+        for (Student student : students) {
 
+            if (student != null && student.getClassroom().getYear() == 2025
+                    && student.getSex().equalsIgnoreCase(sex)) {
 
+                if (student.getNotes() != null) {
+                    for (Note note : student.getNotes()) {
+                        if (note != null && note.getValor() != null) {
+                            suma += note.getValor();
+                            contador++;
+                        }
 
+                    }
 
+                }
+            }
+        }
+        return (contador == 0) ? null : (double) suma / contador;
+    }
 
+    // } else {
+    // if (student != null && student.getClassroom().getYear() == 2025
+    // && student.getSex().contentEquals("Femenino")) {
 
+    // if (student.getNotes() != null) {
+    // for (Note note : student.getNotes()) {
+    // if (note != null && note.getValor() != null) {
+    // suma += note.getValor();
+    // contador++;
+    // }
 
+    // }
+    // }
 
+    // }
 
+    // }
 
+    // }
+    // return (contador == 0) ? null : (double) suma / contador;
 
+    //}
 
-
-
-
-
-
-
-
+    /*
+     * private Teacher convertToEntity(TeacherDTO teacherDTO) {
+     * return modelMapper.map(teacherDTO, Teacher.class);
+     * }
+     * 
+     * private TeacherDTO convertToDto(Teacher teacher) {
+     * return modelMapper.map(teacher, TeacherDTO.class);
+     * }
+     */
 
     // =================
     // Con Chat GPT:
@@ -182,9 +243,7 @@ public class StudentService {
     }
 
     // POST recalcular nota media de los estudiantes para un año concreto
-    //public List<StudentDTO> recalculateAverageForYear(Integer year) {}
-
-        
+    // public List<StudentDTO> recalculateAverageForYear(Integer year) {}
 
     // POST filtro por nombre, apellido, sex o clase usando json
     public List<StudentDTO> getStudentFiltered(StudentFilterDTO filter) {
@@ -206,50 +265,53 @@ public class StudentService {
                 .toList();
     }
 
-//mismo metodo que arriba pero sin lambdas ni stream...
-/*public List<StudentDTO> getStudentFiltered(String name, String surname, String sex, Long classroomId) {
-
-    List<Student> students = studentRepository.findAll();
-    List<StudentDTO> result = new ArrayList<>();
-
-    for (Student student : students) {
-
-        // filtro name
-        if (name != null) {
-            if (student.getName() == null || !student.getName().equalsIgnoreCase(name)) {
-                continue; // no cumple -> pasa al siguiente estudiante
-            }
-        }
-
-        // filtro surname
-        if (surname != null) {
-            if (student.getSurname() == null || !student.getSurname().equalsIgnoreCase(surname)) {
-                continue;
-            }
-        }
-
-        // filtro sex
-        if (sex != null) {
-            if (student.getSex() == null || !student.getSex().equalsIgnoreCase(sex)) {
-                continue;
-            }
-        }
-
-        // filtro classroomId
-        if (classroomId != null) {
-            if (student.getClassroom() == null || !student.getClassroom().getId().equals(classroomId)) {
-                continue;
-            }
-        }
-
-        // si ha pasado todos los filtros, lo convierto a DTO
-        StudentDTO dto = StudentMapper.toDTO(student);
-        result.add(dto);
-    }
-
-    return result;
-}
- */
-
+    // mismo metodo que arriba pero sin lambdas ni stream...
+    /*
+     * public List<StudentDTO> getStudentFiltered(String name, String surname,
+     * String sex, Long classroomId) {
+     * 
+     * List<Student> students = studentRepository.findAll();
+     * List<StudentDTO> result = new ArrayList<>();
+     * 
+     * for (Student student : students) {
+     * 
+     * // filtro name
+     * if (name != null) {
+     * if (student.getName() == null || !student.getName().equalsIgnoreCase(name)) {
+     * continue; // no cumple -> pasa al siguiente estudiante
+     * }
+     * }
+     * 
+     * // filtro surname
+     * if (surname != null) {
+     * if (student.getSurname() == null ||
+     * !student.getSurname().equalsIgnoreCase(surname)) {
+     * continue;
+     * }
+     * }
+     * 
+     * // filtro sex
+     * if (sex != null) {
+     * if (student.getSex() == null || !student.getSex().equalsIgnoreCase(sex)) {
+     * continue;
+     * }
+     * }
+     * 
+     * // filtro classroomId
+     * if (classroomId != null) {
+     * if (student.getClassroom() == null ||
+     * !student.getClassroom().getId().equals(classroomId)) {
+     * continue;
+     * }
+     * }
+     * 
+     * // si ha pasado todos los filtros, lo convierto a DTO
+     * StudentDTO dto = StudentMapper.toDTO(student);
+     * result.add(dto);
+     * }
+     * 
+     * return result;
+     * }
+     */
 
 }

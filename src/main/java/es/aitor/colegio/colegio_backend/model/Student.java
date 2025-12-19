@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 
+
 @Data
 @Entity
 @Table(name = "students")
@@ -47,6 +48,9 @@ public class Student {
 
     @Column
     private Double average_grade;
+
+    @Column
+    private Integer average_age_delegate;
 
     @ManyToOne
     @JoinColumn(name = "classroom_id")

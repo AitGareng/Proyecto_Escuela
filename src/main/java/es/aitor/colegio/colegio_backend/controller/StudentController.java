@@ -28,69 +28,69 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/dto") //obtener todos los students por dto (funcionando)
-    public List<StudentDTO> getAllStudentsByDTO() {
-        return studentService.getAllStudentsByDTO();
+    @GetMapping("/dto") // obtener todos los students por dto /// HECHO CON STREAM, NO USAR ///
+    public List<StudentDTO> getAllStudentsByDTOStream() {
+        return studentService.getAllStudentsByDTOStream();
     }
 
-    @GetMapping //obtener todos los student
+    @GetMapping // obtener todos los student
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
 
-    @PostMapping //crear un nuevo student
+    @PostMapping // crear un nuevo student
     public Student createStudent(@RequestBody Student student) {
         Student studentSaved = studentService.createStudent(student);
         return studentSaved;
     }
 
-    @PutMapping("/{id}") //actualizar student
+    @PutMapping("/{id}") // actualizar student
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
         return studentService.updateStudent(id, student);
     }
 
-    @DeleteMapping("/{id}") //borrar student
+    @DeleteMapping("/{id}") // borrar student
     public String deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id, null);
         return "Estudiante eliminado";
     }
 
-    @PostMapping("/filterjson") //filtrar student por json
+    @PostMapping("/filterjson") // filtrar student por json
     public List<StudentDTO> getStudentsFiltered(@RequestBody StudentFilterDTO filter) {
         return studentService.getStudentFiltered(filter);
     }
 
-    //@PostMapping("/average/2025") //
-    //public List<StudentDTO> recalculateAverage2025() {
-        //return studentService.recalculateAverageForYear(2025);
-    //}
+    // @PostMapping("/average/2025") //
+    // public List<StudentDTO> recalculateAverage2025() {
+    // return studentService.recalculateAverageForYear(2025);
+    // }
 
-    @GetMapping("/{id}") //filtrar student por id
+    @GetMapping("/{id}") // filtrar student por id
     public Student getStudent(@PathVariable long id) {
         return studentService.getStudent(id);
     }
 
-    @GetMapping("/byClassroom/{classroomId}") //filtrar students por clase
+    @GetMapping("/byClassroom/{classroomId}") // filtrar students por clase
     public List<Student> getStudentPerClassroom(@PathVariable long classroomId) {
         return studentService.getStudentByClassroomId(classroomId);
     }
 
-    @GetMapping("/name/{name}") //filtrar students por nombre
+    @GetMapping("/name/{name}") // filtrar students por nombre
     public List<Student> getStudentByName(@PathVariable String name) {
         return studentService.getStudentByName(name);
     }
 
-    @GetMapping("/surname/{surname}") //filtrar students por apellido
+    @GetMapping("/surname/{surname}") // filtrar students por apellido
     public List<Student> getStudentBySurname(@PathVariable String surname) {
         return studentService.getStudentBySurname(surname);
     }
 
-    @GetMapping("/sex/{sex}") //filtrar students por sex
+    @GetMapping("/sex/{sex}") // filtrar students por sex
     public List<Student> getStudentBySex(@PathVariable String sex) {
         return studentService.getStudentBySex(sex);
     }
 
-    @GetMapping("/classroom/{classroom}") //filtrar students por clase(duplicado)
+    @GetMapping("/classroom/{classroom}") // filtrar students por clase(duplicado)
     public List<Student> getStudentByClassroom(@PathVariable Classroom classroom) {
         return studentService.getStudentsByClassroom(classroom);
     }
@@ -106,7 +106,7 @@ public class StudentController {
         return studentService.getStudentByParameters(name, surname, sex);
     }
 
-    @GetMapping("/filter") //filtrar students por parametros
+    @GetMapping("/filterParameters") // filtrar students por parametros
     public List<StudentDTO> getStudentsFiltered(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String surname,
@@ -116,10 +116,26 @@ public class StudentController {
         return studentService.getStudentFiltered(name, surname, sex, classroomId);
     }
 
-    @GetMapping("/2025")
-    public List<StudentDTO> studentsOf2025(){
+    @GetMapping("/2025") // obtener lista estudiantes de 2025 con su nota media de ese año
+    public List<StudentDTO> studentsOf2025() {
         return studentService.studentsOf2025();
 
+    }
+
+    @GetMapping("/MediaDelegados")
+    public String averageAgeDelegateByDTO() {
+        return "EL promedio de edad de los delegados de 2025 es de " + studentService.averageAgeDelegateByDTO() + ".";
+
+    }
+
+    @GetMapping("/allStudentsDto")
+    public List<StudentDTO> getAllStudentsByDTO(){
+        return studentService.getAllStudentsByDTO();
+    }
+
+    @GetMapping("/MediaNotasPorSex/{sex}")
+    public String averageRatingsBySex( @PathVariable String sex){
+        return "El promedio de notas es: " + studentService.averageRatingsBySex( sex);
     }
 
 }

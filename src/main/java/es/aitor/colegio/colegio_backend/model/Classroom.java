@@ -35,6 +35,9 @@ public class Classroom {
      @OneToMany(mappedBy = "classroom")
     private List<Student> students;
 
+    @OneToMany(mappedBy = "classroom")
+    private List<Subject> subjects;
+
    // @Column
     //private int totalStudentsClass;
 

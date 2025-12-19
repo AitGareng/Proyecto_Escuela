@@ -18,8 +18,9 @@ public class StudentDTO {
     //private Date birthDate;
     private Boolean delegado;
     //private String sex;
-    //private int age;
+    private int age;
     private Double average_grade;
+    //private Integer average_age_delegate;
 
     private Long classroomId;
     private String classroomName;

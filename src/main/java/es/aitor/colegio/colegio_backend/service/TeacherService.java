@@ -87,7 +87,7 @@ public class TeacherService {
                 .orElseThrow(() -> new RuntimeException("Profesor con " + id + " no encontrado"));
         teacherExisting.setName(teacherDTO.getName());
         // teacherExisting.setSurname(teacherDTO.getSurname());
-        // teacherExisting.setEmail(teacherDTO.getEmail());
+         teacherExisting.setEmail(teacherDTO.getEmail());
         // teacherExisting.setSubjects(teacherDTO.getSubjects());
 
         Teacher updated = teacherRepository.save(teacherExisting);
@@ -149,8 +149,8 @@ public class TeacherService {
 
     
 
-    // PUT con DTO asignar una asignatura a un profesor
-    public String updateTeacherDto(Long id, TeacherDTO teacherDTO) {
+    // PUT STRING con DTO STRIN asignar una asignatura a un profesor /// NO USAR ///
+    public String updateTeacherDtoByString(Long id, TeacherDTO teacherDTO) {
         Teacher teacherExisting2 = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Profesor con id  " + id + " no encontrado"));
 
@@ -180,7 +180,7 @@ public class TeacherService {
     }
 
      // PUT con DTO asignar una asignatura a un profesor
-    public TeacherDTO updateTeacherDto2(Long id, TeacherDTO teacherDTO) {
+    public TeacherDTO updateTeacherDto(Long id, TeacherDTO teacherDTO) {
         Teacher teacherExisting2 = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Profesor con id  " + id + " no encontrado"));
 

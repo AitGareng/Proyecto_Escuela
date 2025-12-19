@@ -50,12 +50,12 @@ public class ClassroomController {
         return classroomService.getAllClassroomByDTO();
     }
 
-    @PutMapping("/prueba/{id}")
+    @PutMapping("/asingClassroom/{id}")
     public String asignClassroomToStudent(@PathVariable Long id, @RequestBody ClassroomDTO classroomDTO ){
         return classroomService.asignClassroomToStudent(id, classroomDTO);
     }
 
-    @GetMapping("/prueba")
+    @GetMapping("/allClassrooms") //Obtener todas las clases por DTO
     public List<ClassroomDTO> GetAllClassroomsByDTO2(){
         return classroomService.getAllClassroomByDTO2();
     }

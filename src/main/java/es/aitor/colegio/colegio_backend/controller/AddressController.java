@@ -44,7 +44,7 @@ public class AddressController {
         return addressService.updateAddress(id, address);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public String deleteAddress(@PathVariable long id){
         addressService.deleteAddress(id);
         return "Direccion eliminada correctamente";
